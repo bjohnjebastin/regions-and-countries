@@ -1,27 +1,32 @@
-# RegionsAndCountries
+RegionsAndCountries
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.1.
 
-## Development server
+## Styling guides
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+I have followed the style guide mentioned in https://angular.io/guide/styleguide
+Followed the Single Responsibility Principle, the country service would focus on getting only the country details.
 
-## Code scaffolding
+## CSS coding standards
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+I have followed the CSS/SCSS coding guidelines mentioned in https://docs.ckan.org/en/ckan-2.7.3/contributing/css.html
 
-## Build
+## Installation instructions
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+We can build an Azure pipeline and integrate with Git to implement Continuous Integration and Continuous Deployment
 
-## Running unit tests
+## How the application works
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng serve --open` command to open the web application in the browser which displays two drop-down to begin with.
+The first drop-down, labelled as `Region`, displays the list of regions by default. Choosing a region would initiate an API call to get the relevant countries available for this region and populates the second drop-down, labelled as `Country`.
+The API call is triggered only once for each region and then stored in the state and used if required for further actions.
+Selecting a country would display the name, capital, population, currencies and flag in a tabular format.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## What else I would have done
+- Would have written more unit tests to cover all possible scenarios.
+- Would have written end-to-end testing using Protractor to test the website from end user's perspective.
+- Would have implemented proper error handling.
+- Would have written comments explaining the code.
+- Would have used service worker to implement PWA, so that the website will be cached and can work offline.
+- Would have concentrated more on styling.
+- Would have implemented Accessibility.
