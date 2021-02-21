@@ -18,6 +18,8 @@ export class LoadRegionsAction implements Action {
 
 export class LoadCountriesAction implements Action {
     readonly type = RegionActionTypes.LOAD_COUNTRIES;
+
+    constructor(public payload: string) { }
 }
 
 export class LoadCountriesSuccessAction implements Action {

@@ -13,14 +13,14 @@ export class RegionEffects {
     .pipe(
       ofType<LoadCountriesAction>(RegionActionTypes.LOAD_COUNTRIES),
       mergeMap(
-        () => this.countryService.getCountries('europe')
+        ((action) => this.countryService.getCountries(action.payload)
           .pipe(
             map(data => {
               return new LoadCountriesSuccessAction(data)
             }),
             catchError(error => of(new LoadCountriesFailureAction(error)))
           )
-      ),
+      )),
   );
 
   constructor(
