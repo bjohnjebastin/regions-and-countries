@@ -7,5 +7,5 @@ import { Country } from 'src/app/models/country.model';
   styleUrls: ['./country.component.scss']
 })
 export class CountryComponent {
-  @Input() public country: Country;
+  @Input() public country: Country = null;
 }

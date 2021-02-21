@@ -5,7 +5,8 @@ export const regionFeatureKey = 'region';
 
 export interface RegionState {
     regions: Array<string>;
-    countries: Array<Country>;
+    // countries: Array<Country>;
+    countries: Map<string, Array<Country>>;
     regionSelected: string;
     countrySelected: string;
     loading: boolean;
@@ -17,7 +18,7 @@ const initialState: RegionState = {
         'Europe',
         'Asia'
     ],
-    countries: [],
+    countries: new Map<string, Array<Country>>(),
     regionSelected: '',
     countrySelected: '',
     loading: false,
@@ -35,13 +36,17 @@ export function RegionReducer(state: RegionState = initialState, action: RegionA
         case RegionActionTypes.LOAD_COUNTRIES:
             return {
                 ...state,
+                regionSelected: action.payload,
                 loading: true
             };
         
         case RegionActionTypes.LOAD_COUNTRIES_SUCCESS:
+            const regionSelected = state.regionSelected;
+            const countries = state.countries;
+            countries.set(regionSelected, action.payload);
             return {
                 ...state,
-                countries: action.payload,
+                countries: countries,
                 loading: false
             };
 

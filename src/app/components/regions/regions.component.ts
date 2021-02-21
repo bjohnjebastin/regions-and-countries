@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/models/appstate.model';
 import { Country } from 'src/app/models/country.model';
@@ -17,6 +17,8 @@ export class RegionsComponent implements OnInit {
   regions$: Observable<Array<string>>;
   countries$: Observable<Array<Country>>;
 
+  regionSelected$: Observable<string>;
+
   regionSelectConfig: SelectConfig;
   countrySelectConfig: SelectConfig;
 
@@ -26,20 +28,13 @@ export class RegionsComponent implements OnInit {
     this.regions$ = this.store.select(Selectors.selectRegions);
     this.countries$ = this.store.select(Selectors.selectCountries);
 
-    const config = new SelectConfig();
-    config.label = 'Region';
-    this.regions$.subscribe(regions => {
-      config.items = regions
-    });
+    this.regionSelected$ = this.store.select(Selectors.selectRegion);
+   
+    // Initialise the properties for Region drop down
+    this.regionSelectConfig = this.configureSelect('region');
 
-    this.regionSelectConfig = config;
-
-    const cConfig = new SelectConfig();
-    cConfig.label = 'Country';
-    this.countries$.subscribe(x => { 
-      cConfig.items = x.map(y => y.name)
-    });
-    this.countrySelectConfig = cConfig;
+    // Initialise the properties for Country drop down
+    this.countrySelectConfig = this.configureSelect('country');
   }
 
   onRegionChanged(region: string): void {
@@ -48,5 +43,27 @@ export class RegionsComponent implements OnInit {
 
   onCountryChanged(country: string): void {  
     this.store.dispatch(new Actions.CountrySelectedAction(country));
+  }
+
+  private configureSelect(dropdownFor: string): SelectConfig {
+    const config = new SelectConfig();
+
+    // Initialise label
+    config.label = dropdownFor === 'region' ? 'Region' : 'Country';
+
+    // Initialise items
+    if (dropdownFor === 'region') {
+      this.regions$.subscribe(regions => {
+        config.items = regions;
+      });
+    } else {
+        this.countries$.subscribe(countries => {
+          if (countries !== undefined) {
+            config.items = countries.map(country => country.name)
+          }
+        });
+    }
+    
+    return config;
   }
 }
