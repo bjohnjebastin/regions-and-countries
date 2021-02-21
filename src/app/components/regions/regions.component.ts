@@ -38,7 +38,7 @@ export class RegionsComponent implements OnInit {
   }
 
   onRegionChanged(region: string): void {
-    this.store.dispatch(new Actions.LoadCountriesAction(region));
+    this.store.dispatch(new Actions.RegionSelectedAction(region));
   }
 
   onCountryChanged(country: string): void {  

@@ -57,6 +57,13 @@ export function RegionReducer(state: RegionState = initialState, action: RegionA
                 loading: false
             };
 
+        case RegionActionTypes.REGION_SELECTED:
+            return {
+                ...state,
+                regionSelected: action.payload,
+                loading: false
+            }
+
         case RegionActionTypes.COUNTRY_SELECTED:
             return {
                 ...state,

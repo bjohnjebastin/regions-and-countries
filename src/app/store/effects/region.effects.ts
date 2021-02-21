@@ -1,30 +1,47 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { map, mergeMap, catchError, withLatestFrom } from 'rxjs/operators';
 
-import { of } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { CountryService } from 'src/app/services/country.service';
-import { LoadCountriesAction, LoadCountriesFailureAction, LoadCountriesSuccessAction, RegionActionTypes } from '../actions/region.actions';
+import * as RegionActions from '../actions/region.actions';
+import { selectCountries } from '../selectors/region.selectors';
+import { AppState } from 'src/app/models/appstate.model';
 
 @Injectable()
 export class RegionEffects {
 
-  @Effect() loadCountries$ = this.actions$
+  selectRegion$ = createEffect(() => this.actions$
     .pipe(
-      ofType<LoadCountriesAction>(RegionActionTypes.LOAD_COUNTRIES),
+      ofType<RegionActions.RegionSelectedAction>(RegionActions.RegionActionTypes.REGION_SELECTED),
+      withLatestFrom(this.store.select(selectCountries)),
+      mergeMap(([action, countries]) => {
+        if (countries !== undefined) {
+          return EMPTY;
+        }
+
+        return of(new RegionActions.LoadCountriesAction(action.payload));
+      })
+  ));
+
+ loadCountries$ = createEffect(() => this.actions$
+    .pipe(
+      ofType<RegionActions.LoadCountriesAction>(RegionActions.RegionActionTypes.LOAD_COUNTRIES),
       mergeMap(
         ((action) => this.countryService.getCountries(action.payload)
           .pipe(
             map(data => {
-              return new LoadCountriesSuccessAction(data)
+              return new RegionActions.LoadCountriesSuccessAction(data)
             }),
-            catchError(error => of(new LoadCountriesFailureAction(error)))
+            catchError(error => of(new RegionActions.LoadCountriesFailureAction(error)))
           )
       )),
-  );
+  ));
 
   constructor(
     private actions$: Actions,
-    private countryService: CountryService
+    private countryService: CountryService,
+    private store: Store<AppState>
   ) { }
 }
