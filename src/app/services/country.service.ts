@@ -12,7 +12,7 @@ export class CountryService {
 
   constructor(private http: HttpClient) { }
 
-  public getCountries(region: string):Observable<Country[]> {
+  public getCountries(region: string): Observable<Country[]> {
     return this.http.get<Country[]>(this.API_URL + region);
   }
 }

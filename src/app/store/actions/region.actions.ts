@@ -51,4 +51,4 @@ export type RegionAction = LoadRegionsAction |
     LoadCountriesSuccessAction |
     LoadCountriesFailureAction |
     RegionSelectedAction |
-    CountrySelectedAction
+    CountrySelectedAction;

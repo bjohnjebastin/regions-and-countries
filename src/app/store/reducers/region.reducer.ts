@@ -1,16 +1,15 @@
-import { Country } from "src/app/models/country.model";
-import { RegionAction, RegionActionTypes } from "../actions/region.actions";
+import { Country } from 'src/app/models/country.model';
+import { RegionAction, RegionActionTypes } from '../actions/region.actions';
 
 export const regionFeatureKey = 'region';
 
 export interface RegionState {
     regions: Array<string>;
-    // countries: Array<Country>;
     countries: Map<string, Array<Country>>;
     regionSelected: string;
     countrySelected: string;
     loading: boolean;
-    error: Error
+    error: Error;
 }
 
 const initialState: RegionState = {
@@ -23,30 +22,32 @@ const initialState: RegionState = {
     countrySelected: '',
     loading: false,
     error: undefined
-}
+};
 
 export function RegionReducer(state: RegionState = initialState, action: RegionAction) {
-    switch(action.type) {
+
+    switch (action.type) {
         case RegionActionTypes.LOAD_REGIONS:
             return {
                 ...state,
                 regions: action.payload,
                 loading: false
             };
+
         case RegionActionTypes.LOAD_COUNTRIES:
             return {
                 ...state,
                 regionSelected: action.payload,
                 loading: true
             };
-        
+
         case RegionActionTypes.LOAD_COUNTRIES_SUCCESS:
             const regionSelected = state.regionSelected;
-            const countries = state.countries;
-            countries.set(regionSelected, action.payload);
+            const countriesToLoad = state.countries;
+            countriesToLoad.set(regionSelected, action.payload);
             return {
                 ...state,
-                countries: countries,
+                countries: countriesToLoad,
                 loading: false
             };
 
@@ -62,7 +63,7 @@ export function RegionReducer(state: RegionState = initialState, action: RegionA
                 ...state,
                 regionSelected: action.payload,
                 loading: false
-            }
+            };
 
         case RegionActionTypes.COUNTRY_SELECTED:
             return {

@@ -1,6 +1,6 @@
-import { createSelector } from "@ngrx/store";
-import { AppState } from "src/app/models/appstate.model";
-import { RegionState } from "../reducers/region.reducer";
+import { createSelector } from '@ngrx/store';
+import { AppState } from 'src/app/models/appstate.model';
+import { RegionState } from '../reducers/region.reducer';
 
 export const selectFeature = (state: AppState) => state.region;
 

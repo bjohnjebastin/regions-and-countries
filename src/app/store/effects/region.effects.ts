@@ -32,7 +32,7 @@ export class RegionEffects {
         ((action) => this.countryService.getCountries(action.payload)
           .pipe(
             map(data => {
-              return new RegionActions.LoadCountriesSuccessAction(data)
+              return new RegionActions.LoadCountriesSuccessAction(data);
             }),
             catchError(error => of(new RegionActions.LoadCountriesFailureAction(error)))
           )

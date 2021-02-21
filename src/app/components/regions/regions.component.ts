@@ -29,7 +29,7 @@ export class RegionsComponent implements OnInit {
     this.countries$ = this.store.select(Selectors.selectCountries);
 
     this.regionSelected$ = this.store.select(Selectors.selectRegion);
-   
+
     // Initialise the properties for Region drop down
     this.regionSelectConfig = this.configureSelect('region');
 
@@ -41,7 +41,7 @@ export class RegionsComponent implements OnInit {
     this.store.dispatch(new Actions.RegionSelectedAction(region));
   }
 
-  onCountryChanged(country: string): void {  
+  onCountryChanged(country: string): void {
     this.store.dispatch(new Actions.CountrySelectedAction(country));
   }
 
@@ -59,11 +59,11 @@ export class RegionsComponent implements OnInit {
     } else {
         this.countries$.subscribe(countries => {
           if (countries !== undefined) {
-            config.items = countries.map(country => country.name)
+            config.items = countries.map(country => country.name);
           }
         });
     }
-    
+
     return config;
   }
 }
