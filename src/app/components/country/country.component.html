@@ -1,32 +1,30 @@
-<div class="container" *ngIf="country !== undefined">
-    <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <td>Name</td>
-                <td [innerHtml]="country.name"></td>
-            </tr>
-            <tr>
-                <td>Capital</td>
-                <td [innerHtml]="country.capital"></td>
-            </tr>
-            <tr>
-                <td>Population</td>
-                <td [innerHtml]="country.population"></td>
-            </tr>
-            <tr>
-                <td>Currencies</td>
-                <td>
-                    <div *ngFor="let currency of country.currencies">
-                        {{currency.code}} {{currency.name}} {{currency.symbol}}
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Flag</td>
-                <td>
-                    <img [src]="country.flag">
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<table class="table table-bordered" *ngIf="country !== undefined">
+    <tbody>
+        <tr>
+            <td class="column-header">Name</td>
+            <td [innerHtml]="country.name"></td>
+        </tr>
+        <tr>
+            <td class="column-header">Capital</td>
+            <td [innerHtml]="country.capital"></td>
+        </tr>
+        <tr>
+            <td class="column-header">Population</td>
+            <td [innerHtml]="country.population"></td>
+        </tr>
+        <tr>
+            <td class="column-header">Currencies</td>
+            <td>
+                <div *ngFor="let currency of country.currencies">
+                    {{currency.name}} {{currency.code}} {{currency.symbol}}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="column-header">Flag</td>
+            <td>
+                <img class="flag" [src]="country.flag">
+            </td>
+        </tr>
+    </tbody>
+</table>

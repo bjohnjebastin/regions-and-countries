@@ -6,16 +6,10 @@ import { SelectConfig } from 'src/app/models/selectConfig.model';
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss']
 })
-export class SelectComponent implements OnChanges {
+export class SelectComponent {
 
   @Input() public selectConfig: SelectConfig;
   @Output() emitSelectedItem: EventEmitter<string> = new EventEmitter();
-
-  constructor() { }
-
-  ngOnChanges(): void {
-    console.log(this.selectConfig);
-  }
 
   onOptionChanged(event: any): void {
     this.emitSelectedItem.emit(event.target.value);

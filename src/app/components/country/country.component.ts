@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Country } from 'src/app/models/country.model';
 
 @Component({
@@ -6,12 +6,6 @@ import { Country } from 'src/app/models/country.model';
   templateUrl: './country.component.html',
   styleUrls: ['./country.component.scss']
 })
-export class CountryComponent implements OnChanges {
+export class CountryComponent {
   @Input() public country: Country;
-
-  constructor() { }
-
-  ngOnChanges(): void {
-    console.log(this.country);
-  }
 }

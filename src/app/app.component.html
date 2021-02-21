@@ -1,8 +1,4 @@
-<div class="container px-10">
-    <div class="row col">
-        <app-regions></app-regions>
-    </div>
-    <div class="row col">
-        <app-country [country]="country$ | async"></app-country>
-    </div>
+<div class="container">
+    <app-regions></app-regions>
+    <app-country [country]="country$ | async"></app-country>
 </div>

@@ -13,10 +13,9 @@ export class RegionEffects {
     .pipe(
       ofType<LoadCountriesAction>(RegionActionTypes.LOAD_COUNTRIES),
       mergeMap(
-        () => this.countryService.getCountries('asia')
+        () => this.countryService.getCountries('europe')
           .pipe(
             map(data => {
-              console.log(data);
               return new LoadCountriesSuccessAction(data)
             }),
             catchError(error => of(new LoadCountriesFailureAction(error)))

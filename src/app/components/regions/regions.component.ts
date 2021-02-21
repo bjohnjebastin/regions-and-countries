@@ -35,7 +35,7 @@ export class RegionsComponent implements OnInit {
     this.regionSelectConfig = config;
 
     const cConfig = new SelectConfig();
-    cConfig.label = 'Country';
+    cConfig.label = 'Select country';
     this.countries$.subscribe(x => { 
       cConfig.items = x.map(y => y.name)
     });
@@ -43,14 +43,10 @@ export class RegionsComponent implements OnInit {
   }
 
   onRegionChanged(region: string): void {
-    console.log(region);
-
     this.store.dispatch(new Actions.LoadCountriesAction);
   }
 
-  onCountryChanged(country: string): void {
-    console.log(country);
-    
+  onCountryChanged(country: string): void {  
     this.store.dispatch(new Actions.CountrySelectedAction(country));
   }
 }
