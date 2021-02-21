@@ -1,0 +1,6 @@
+<select *ngIf="selectConfig !== undefined" (change)="onOptionChanged($event)">
+    <option value="-1">Please select</option>
+    <option *ngFor="let item of selectConfig.items">
+        {{item}}
+    </option>
+</select>
