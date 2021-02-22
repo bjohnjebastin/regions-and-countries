@@ -12,7 +12,7 @@ export interface RegionState {
     error: Error;
 }
 
-const initialState: RegionState = {
+export const initialState: RegionState = {
     regions: [
         'Europe',
         'Asia'
