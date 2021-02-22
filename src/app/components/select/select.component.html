@@ -1,6 +1,6 @@
-<div class="form-group">
+<div class="form-group" *ngIf="selectConfig !== undefined">
     <label for="">{{selectConfig.label}}</label>
-    <select class="form-control" *ngIf="selectConfig !== undefined" (change)="onOptionChanged($event)">
+    <select class="form-control" (change)="onOptionChanged($event)">
         <option value="-1" selected="selected">Please select</option>
         <option *ngFor="let item of selectConfig.items">
             {{item}}
